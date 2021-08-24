@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "1683510b-c45f-4aae-80fb-ba03a9c6f597",
+		"name": "TEST GIV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Access Website",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hostname}}",
+					"host": [
+						"{{hostname}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"username send for signing up \"+data.username)",
+							"console.log(\"password send for signing up \"+data.password)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user[email]",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "user[password]",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{hostname}}/users",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Test rest api of http://a.testaddressbook.com/"
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"username send for signing in \"+data.username)",
+							"console.log(\"password send for signing in \"+data.password)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "session[email]",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "session[password]",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{hostname}}/session",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"session"
+					],
+					"query": [
+						{
+							"key": "session[email]",
+							"value": "{{username}}",
+							"disabled": true
+						},
+						{
+							"key": "session[password]",
+							"value": "{{password}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(pm.response.json())",
+							"",
+							"pm.environment.set(\"id_address\", pm.response.json().id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "address[first_name]",
+							"value": "{{first_name}}",
+							"type": "text"
+						},
+						{
+							"key": "address[last_name]",
+							"value": "{{last_name}}",
+							"type": "text"
+						},
+						{
+							"key": "address[address1]",
+							"value": "{{address1}}",
+							"type": "text"
+						},
+						{
+							"key": "address[address2]",
+							"value": "{{address2}}",
+							"type": "text"
+						},
+						{
+							"key": "address[city]",
+							"value": "{{city}}",
+							"type": "text"
+						},
+						{
+							"key": "address[state]",
+							"value": "{{state}}",
+							"type": "text"
+						},
+						{
+							"key": "address[zip_code]",
+							"value": "{{zip_code}}",
+							"type": "text"
+						},
+						{
+							"key": "address[country]",
+							"value": "{{country}}",
+							"type": "text"
+						},
+						{
+							"key": "address[birthday]",
+							"value": "{{birthday}}",
+							"type": "text"
+						},
+						{
+							"key": "address[color]",
+							"value": "{{color}}",
+							"type": "text"
+						},
+						{
+							"key": "address[age]",
+							"value": "{{age}}",
+							"type": "text"
+						},
+						{
+							"key": "address[website]",
+							"value": "{{website}}",
+							"type": "text"
+						},
+						{
+							"key": "address[picture]",
+							"value": "{{picture}}",
+							"type": "text"
+						},
+						{
+							"key": "address[phone]",
+							"value": "{{phone}}",
+							"type": "text"
+						},
+						{
+							"key": "address[interest_climb]",
+							"value": "{{interest_climb}}",
+							"type": "text"
+						},
+						{
+							"key": "address[interest_dance]",
+							"value": "{{interest_dance}}",
+							"type": "text"
+						},
+						{
+							"key": "address[interest_read]",
+							"value": "{{interest_read}}",
+							"type": "text"
+						},
+						{
+							"key": "address[note]",
+							"value": "{{note}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{hostname}}/addresses",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(pm.response.json())",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hostname}}/addresses/{{id_address}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"addresses",
+						"{{id_address}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"Delete Address \"+pm.environment.get(\"id_address\"))",
+							"console.log(pm.response.json())",
+							"",
+							"pm.environment.unset(\"id_address\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_method",
+							"value": "delete",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{hostname}}/addresses/{{id_address}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"addresses",
+						"{{id_address}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Out",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_method",
+							"value": "delete",
+							"type": "text"
+						},
+						{
+							"key": "authenticity_token",
+							"value": "5a0dba1bff882984003201702dc82e16e667be48",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{hostname}}/sign_out",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"sign_out"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is \"+pm.response.code, function () { pm.response.to.have.status(200); }); "
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "email",
+			"value": "",
+			"disabled": true
+		}
+	]
+}
